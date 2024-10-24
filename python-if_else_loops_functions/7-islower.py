@@ -1,7 +1,6 @@
 #!/usr/bin/python3
-print(islower('a'))  # True
-print(islower('z'))  # True
-print(islower('A'))  # False
-print(islower('1'))  # False
-print(islower('@'))  # False
-
+def islower (c):
+    if ord (c) >= 97 and ord(c) <=122:
+        return true
+    else:
+        return false
