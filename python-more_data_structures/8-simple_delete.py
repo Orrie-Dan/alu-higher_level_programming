@@ -1,18 +1,34 @@
 #!/usr/bin/python3
-def simple_delete(a_dictionary, key=""):
-    # Remove the key from the dictionary if it exists
-    if key in a_dictionary:
-        del a_dictionary[key]
+def update_dictionary(a_dictionary, key, value):
+    # Update the dictionary with the given key and value
+    a_dictionary[key] = value
+
+def print_sorted_dictionary(a_dictionary):
+    if a_dictionary is None:
+        return  # Handle the case where the input is None
+
+    # Sort the keys of the dictionary and print key-value pairs
+    for key in sorted(a_dictionary.keys()):
+        print(f"{key}: {a_dictionary[key]}")
 
 # Example usage
 if __name__ == "__main__":
-    my_dict = {'a': 1, 'b': 2, 'c': 3}
+    new_dict = {
+        "b": "b",
+        "a": "A",
+        "c": "c",
+        "e": "e",
+        "d": "d",
+    }
 
-    # Delete an existing key
-    simple_delete(my_dict, 'b')
-    print(my_dict)  # Output: {'a': 1, 'c': 3}
+    print_sorted_dictionary(new_dict)  # Print the original dictionary
+    print()  # Adding a newline for clarity
 
-    # Attempt to delete a non-existing key
-    simple_delete(my_dict, 'd')
-    print(my_dict)  # Output: {'a': 1, 'c': 3} (unchanged)
+    # Update an existing key
+    update_dictionary(new_dict, 'a', 'Alpha')
+    print_sorted_dictionary(new_dict)  # Print after update
+
+    # Add a new key
+    update_dictionary(new_dict, 'f', 'f')
+    print_sorted_dictionary(new_dict)  # Print after adding new key
 
