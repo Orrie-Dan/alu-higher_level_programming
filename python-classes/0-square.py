@@ -7,6 +7,7 @@ class Square:
         self.dict_ = {}
 
 # Usage example
+if __name__ == "__main__":
 mysquare = Square()
 print(type(mysquare))  # Output: <class '__main__.Square'>
 print(mysquare.dict_)  # Output: {}
