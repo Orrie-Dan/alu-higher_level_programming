@@ -1,12 +1,6 @@
 #!/usr/bin/python3
-class Square:
-    """Represents a square."""
+Square = __import__('0-square').Square
 
-    def __init__(self):
-        """Initialize a new Square instance."""
-        self.dict_ = {}
-
-# Usage example
-mysquare = Square()
-print(type(mysquare))  # Output: <class '__main__.Square'>
-print(mysquare.dict_)  # Output: {}
+my_square = Square()
+print(type(my_square))
+print(my_square.__dict__)
