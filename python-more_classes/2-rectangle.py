@@ -100,6 +100,7 @@ class Rectangle:
             return 0
         return 2 * (self.__width + self.__height)
 
+
 # Test cases
 
 # Case 1: Rectangle with width 2 and height 4
