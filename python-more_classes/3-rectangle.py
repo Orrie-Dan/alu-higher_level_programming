@@ -11,6 +11,7 @@ class Rectangle:
         area(self): Returns the area of the rectangle.
         perimeter(self): Returns the perimeter of the rectangle.
         __str__(self): Returns a string representation of the rectangle, using '#' to draw it.
+        __repr__(self): Returns an "official" string representation of the rectangle object.
     """
 
     def __init__(self, width=0, height=0):
@@ -68,3 +69,6 @@ class Rectangle:
             return ""
         return "\n".join(["#" * self.__width for _ in range(self.__height)])
 
+    def __repr__(self):
+        """Returns an "official" string representation of the rectangle object."""
+        return "Rectangle({},{})".format(self.__width, self.__height)
