@@ -5,17 +5,18 @@ The class includes property methods to get and set these attributes, while ensur
 that the width and height are positive integers. It also includes methods to calculate
 the area and perimeter of the rectangle.
 """
+
 class Rectangle:
     """
     A class that defines a rectangle by its width and height.
 
     Attributes:
-        width (int): The width of the rectangle.
-        height (int): The height of the rectangle.
+        width (int): The width of the rectangle. Must be >= 0 and an integer.
+        height (int): The height of the rectangle. Must be >= 0 and an integer.
 
     Methods:
         area(self): Returns the area of the rectangle.
-        perimeter(self): Returns the perimeter of the rectangle.
+        perimeter(self): Returns the perimeter of the rectangle, or 0 if either dimension is 0.
     """
 
     def __init__(self, width=0, height=0):
@@ -31,26 +32,12 @@ class Rectangle:
 
     @property
     def width(self):
-        """
-        Returns the width of the rectangle.
-
-        Returns:
-            int: The current width of the rectangle.
-        """
+        """Retrieve the width of the rectangle."""
         return self.__width
 
     @width.setter
     def width(self, value):
-        """
-        Sets the width of the rectangle with validation.
-
-        Args:
-            value (int): The new width of the rectangle.
-
-        Raises:
-            TypeError: If the value is not an integer.
-            ValueError: If the value is less than 0.
-        """
+        """Set the width of the rectangle, ensuring it is a non-negative integer."""
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
         if value < 0:
@@ -59,26 +46,12 @@ class Rectangle:
 
     @property
     def height(self):
-        """
-        Returns the height of the rectangle.
-
-        Returns:
-            int: The current height of the rectangle.
-        """
+        """Retrieve the height of the rectangle."""
         return self.__height
 
     @height.setter
     def height(self, value):
-        """
-        Sets the height of the rectangle with validation.
-
-        Args:
-            value (int): The new height of the rectangle.
-
-        Raises:
-            TypeError: If the value is not an integer.
-            ValueError: If the value is less than 0.
-        """
+        """Set the height of the rectangle, ensuring it is a non-negative integer."""
         if not isinstance(value, int):
             raise TypeError("height must be an integer")
         if value < 0:
@@ -86,45 +59,21 @@ class Rectangle:
         self.__height = value
 
     def area(self):
-        """
-        Returns the area of the rectangle.
-
-        Returns:
-            int: The area of the rectangle (width * height).
-        """
+        """Return the area of the rectangle (width * height)."""
         return self.__width * self.__height
 
     def perimeter(self):
-        """
-        Returns the perimeter of the rectangle.
-
-        Returns:
-            int: The perimeter of the rectangle (2 * (width + height)).
-            If either width or height is 0, returns 0.
-        """
+        """Return the perimeter of the rectangle (2 * (width + height))."""
         if self.__width == 0 or self.__height == 0:
             return 0
         return 2 * (self.__width + self.__height)
 
-# Test cases
+    def __str__(self):
+        """Return a string representation of the rectangle using #."""
+        if self.__width == 0 or self.__height == 0:
+            return ""
+        return "\n".join(["#" * self.__width] * self.__height)
 
-# Case 1: Rectangle with width 2 and height 4
-myrectangle = Rectangle(2, 4)
-print("{} - {} => {}".format(myrectangle.width, myrectangle.height, myrectangle.area()))
-
-# Case 2: Rectangle with width 2 and height 4
-myrectangle = Rectangle(2, 4)
-print("{} - {} => {}".format(myrectangle.width, myrectangle.height, myrectangle.perimeter()))
-
-# Case 3: Rectangle with width 10 and height 10
-myrectangle = Rectangle(10, 10)
-print("{} - {} => {} / {}".format(myrectangle.width, myrectangle.height, myrectangle.area(), myrectangle.perimeter()))
-
-# Case 4: Rectangle with width 10 and height 0 (default height)
-myrectangle = Rectangle(10)
-print("{} - {} => {} / {}".format(myrectangle.width, myrectangle.height, myrectangle.area(), myrectangle.perimeter()))
-
-# Case 5: Rectangle with default values (width 0, height 0)
-myrectangle = Rectangle()
-print("{} - {} => {} / {}".format(myrectangle.width, myrectangle.height, myrectangle.area(), myrectangle.perimeter()))
-
+    def __repr__(self):
+        """Return a string representation that is more formal and includes dimensions."""
+        return "Rectangle({}, {})".format(self.__width, self.__height)
