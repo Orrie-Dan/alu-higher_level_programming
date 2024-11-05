@@ -1,34 +1,52 @@
 #!/usr/bin/python3
-Square = __import__('3-square').Square
+"""
+Module that defines a Square class with a private attribute 'size',
+getter and setter methods, and an area method.
+"""
 
-# Creating a Square instance with a valid size
-my_square = Square(5)
-print(type(my_square))  # <class '__main__.Square'>
-print(my_square.__dict__)  # {'_Square__size': 5}
-print(my_square.area())  # 25 (5 * 5)
+class Square:
+    """
+    A class that defines a square by its size, with getter and setter methods for the size attribute.
+    """
 
-# Creating a Square instance with the default size (0)
-default_square = Square()
-print(default_square.area())  # 0 (0 * 0)
+    def __init__(self, size=0):
+        """
+        Initializes a new instance of the Square class with a given size.
 
-# Testing with invalid values
-try:
-    invalid_square = Square(-5)  # This should raise a ValueError
-except Exception as e:
-    print(e)  # Output: size must be >= 0
+        :param size: Size of the square (defaults to 0)
+        :raises TypeError: If size is not an integer
+        :raises ValueError: If size is less than 0
+        """
+        self.size = size  # Using the setter to validate the size
 
-try:
-    invalid_square = Square("5")  # This should raise a TypeError
-except Exception as e:
-    print(e)  # Output: size must be an integer
+    @property
+    def size(self):
+        """
+        Getter for the size attribute.
 
-# Testing setter with invalid size
-try:
-    my_square.size = -3  # This should raise a ValueError
-except Exception as e:
-    print(e)  # Output: size must be >= 0
+        :return: The size of the square
+        """
+        return self.__size
 
-try:
-    my_square.size = "10"  # This should raise a TypeError
-except Exception as e:
-    print(e)  # Output: size must be an integer
+    @size.setter
+    def size(self, value):
+        """
+        Setter for the size attribute. Validates the size before assigning it.
+
+        :param value: The value to set the size to
+        :raises TypeError: If the value is not an integer
+        :raises ValueError: If the value is less than 0
+        """
+        if not isinstance(value, int):
+            raise TypeError("size must be an integer")
+        if value < 0:
+            raise ValueError("size must be >= 0")
+        self.__size = value  # Set the private attribute
+
+    def area(self):
+        """
+        Returns the area of the square.
+
+        :return: Area of the square (size * size)
+        """
+        return self.__size * self.__size
