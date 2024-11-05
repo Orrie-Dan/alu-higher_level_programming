@@ -1,4 +1,10 @@
 #!/usr/bin/python3
+"""
+This module defines a Rectangle class with private attributes for width and height.
+The class includes property methods to get and set these attributes, while ensuring
+that the width and height are positive integers. It also includes methods to calculate
+the area and perimeter of the rectangle.
+"""
 class Rectangle:
     """
     A class that defines a rectangle by its width and height.
@@ -99,3 +105,26 @@ class Rectangle:
         if self.__width == 0 or self.__height == 0:
             return 0
         return 2 * (self.__width + self.__height)
+
+# Test cases
+
+# Case 1: Rectangle with width 2 and height 4
+myrectangle = Rectangle(2, 4)
+print("{} - {} => {}".format(myrectangle.width, myrectangle.height, myrectangle.area()))
+
+# Case 2: Rectangle with width 2 and height 4
+myrectangle = Rectangle(2, 4)
+print("{} - {} => {}".format(myrectangle.width, myrectangle.height, myrectangle.perimeter()))
+
+# Case 3: Rectangle with width 10 and height 10
+myrectangle = Rectangle(10, 10)
+print("{} - {} => {} / {}".format(myrectangle.width, myrectangle.height, myrectangle.area(), myrectangle.perimeter()))
+
+# Case 4: Rectangle with width 10 and height 0 (default height)
+myrectangle = Rectangle(10)
+print("{} - {} => {} / {}".format(myrectangle.width, myrectangle.height, myrectangle.area(), myrectangle.perimeter()))
+
+# Case 5: Rectangle with default values (width 0, height 0)
+myrectangle = Rectangle()
+print("{} - {} => {} / {}".format(myrectangle.width, myrectangle.height, myrectangle.area(), myrectangle.perimeter()))
+
