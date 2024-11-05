@@ -1,4 +1,11 @@
 #!/usr/bin/python3
+"""
+This module defines a Rectangle class that models a rectangle
+with a specified width and height. The class allows for setting and
+retrieving the dimensions of the rectangle and includes methods for
+calculating the area and perimeter. It also provides string and
+representative string outputs for printing and debugging.
+"""
 class Rectangle:
     """
     A class that defines a rectangle by its width and height.
