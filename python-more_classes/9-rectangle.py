@@ -34,11 +34,9 @@ Usage Example:
     square = Rectangle.square(4)   # Creates a square with width and height of 4
     print(square)                   # Prints the square
 """
-
 class Rectangle:
     """
     A class representing a rectangle with validated width, height, and customizable symbol for drawing.
-
     This class provides methods to calculate the area, perimeter, and string representations of
     a rectangle. It includes input validation for the width and height, ensures proper instance tracking,
     and supports customizable drawing symbols. Additionally, the class provides a static method to compare
@@ -73,12 +71,7 @@ class Rectangle:
 
     @property
     def width(self):
-        """
-        Gets the width of the rectangle.
-
-        Returns:
-            int: The width of the rectangle.
-        """
+        """Gets the width of the rectangle."""
         return self._width
 
     @width.setter
@@ -101,12 +94,7 @@ class Rectangle:
 
     @property
     def height(self):
-        """
-        Gets the height of the rectangle.
-
-        Returns:
-            int: The height of the rectangle.
-        """
+        """Gets the height of the rectangle."""
         return self._height
 
     @height.setter
@@ -128,20 +116,12 @@ class Rectangle:
         self._height = value
 
     def area(self):
-        """
-        Calculates and returns the area of the rectangle.
-
-        Returns:
-            int: The area of the rectangle (width * height).
-        """
+        """Calculates and returns the area of the rectangle (width * height)."""
         return self.width * self.height
 
     def perimeter(self):
         """
-        Calculates and returns the perimeter of the rectangle.
-
-        Returns:
-            int: The perimeter of the rectangle (2 * (width + height)).
+        Calculates and returns the perimeter of the rectangle (2 * (width + height)).
 
         If either the width or height is 0, returns 0.
         """
@@ -153,9 +133,6 @@ class Rectangle:
         """
         Returns a string representation of the rectangle using the symbol stored in print_symbol.
 
-        Returns:
-            str: A string representing the rectangle.
-
         If either the width or height is 0, returns an empty string.
         """
         if self.width == 0 or self.height == 0:
@@ -163,21 +140,11 @@ class Rectangle:
         return "\n".join([str(self.print_symbol) * self.width] * self.height)
 
     def __repr__(self):
-        """
-        Returns a string representation of the rectangle for recreating it.
-
-        Returns:
-            str: A string that can be used to recreate the rectangle.
-        """
+        """Returns a string representation of the rectangle for recreating it."""
         return f"Rectangle({self.width}, {self.height})"
 
     def __del__(self):
-        """
-        Prints a message when an instance of the rectangle is deleted.
-
-        This method is called when an instance of Rectangle is about to be destroyed.
-        It prints the message: 'Bye rectangle...'
-        """
+        """Prints a message when an instance of the rectangle is deleted."""
         Rectangle.number_of_instances -= 1
         print("Bye rectangle...")
 
@@ -199,5 +166,30 @@ class Rectangle:
         if not isinstance(rect_1, Rectangle):
             raise TypeError("rect_1 must be an instance of Rectangle")
         if not isinstance(rect_2, Rectangle):
-            raise T
+            raise TypeError("rect_2 must be an instance of Rectangle")
+
+        if rect_1.area() >= rect_2.area():
+            return rect_1
+        return rect_2
+
+    @classmethod
+    def square(cls, size=0):
+        """
+        Creates a new Rectangle instance where width and height are equal (i.e., a square).
+
+        Args:
+            size (int, optional): The size of the square. Defaults to 0.
+
+        Returns:
+            Rectangle: A new Rectangle instance with equal width and height.
+
+        Raises:
+            TypeError: If size is not an integer.
+            ValueError: If size is less than 0.
+        """
+        if not isinstance(size, int):
+            raise TypeError("size must be an integer")
+        if size < 0:
+            raise ValueError("size must be >= 0")
+        return cls(size, size)
 
