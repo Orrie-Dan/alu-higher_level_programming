@@ -1,25 +1,30 @@
 #!/usr/bin/python3
 """
-Module that defines the BaseGeometry class.
-This class is an empty base class for geometry-related classes.
+Module: base_geometry.py
+
+This module contains a class `BaseGeometry`, which serves as a base class for geometric shapes.
+It defines the method `area()` that should be implemented by subclasses to calculate the area of a specific shape.
 """
 
-class Rectangle(BaseGeometry):
-    """Rectangle class that inherits from BaseGeometry."""
-    
-    def __init__(self, width, height):
-        self.width = width
-        self.height = height
+class BaseGeometry:
+    """
+    Class: BaseGeometry
+
+    A base class for geometric shapes. Provides a placeholder method `area()` that raises an exception 
+    if called directly. Subclasses are expected to override this method to provide their own implementation.
+
+    Methods:
+        area(self): Raises an exception with the message "area() is not implemented".
+    """
 
     def area(self):
-        """Overrides the area method to calculate the area of a rectangle."""
-        return self.width * self.height
+        """
+        Method: area
 
-# Create a Rectangle instance
-rect = Rectangle(4, 5)
-print(rect.area())  # Output: 20
+        Raises an Exception indicating that the area method has not been implemented.
 
-# Attempting to call `area()` on a BaseGeometry object should raise an exception:
-# geo = BaseGeometry()
-# geo.area()  # This would raise: Exception: area() is not implemented
+        Raises:
+            Exception: If called directly from BaseGeometry without being overridden in a subclass.
+        """
+        raise Exception("area() is not implemented")
 
