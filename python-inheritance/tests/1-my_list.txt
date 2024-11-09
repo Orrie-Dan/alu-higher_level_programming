@@ -1,36 +1,108 @@
-Test case 1:
-Input: MyList([3, 1, 2, 4])
-Expected Output: [1, 2, 3, 4]
-Actual Output: [1, 2, 3, 4]
-Explanation: The list is printed in ascending order without modifying the original list.
-
-Test case 2:
-Input: MyList([10, 5, 8])
-Expected Output: [5, 8, 10]
-Actual Output: [5, 8, 10]
-Explanation: The list is printed in ascending order without modifying the original list.
-
-Test case 3:
-Input: MyList([0, -1, 100])
-Expected Output: [-1, 0, 100]
-Actual Output: [-1, 0, 100]
-Explanation: The list is printed in ascending order without modifying the original list.
-
-Test case 4:
-Input: MyList([1])
-Expected Output: [1]
-Actual Output: [1]
-Explanation: A single-element list should remain the same when sorted.
-
-Test case 5:
+Test case 1: Check instantiation
 Input: MyList([1, 2, 3])
 Expected Output: [1, 2, 3]
 Actual Output: [1, 2, 3]
-Explanation: An already sorted list should remain the same when printed.
+Explanation: The list is successfully instantiated as a MyList object.
 
-Test case 6:
-Input: MyList([])
+Test case 2: Check inherits from list
+Input: isinstance(MyList([1, 2, 3]), list)
+Expected Output: True
+Actual Output: True
+Explanation: MyList should inherit from the built-in list class.
+
+Test case 3: Check __str__
+Input: str(MyList([1, 2, 3]))
+Expected Output: "[1, 2, 3]"
+Actual Output: "[1, 2, 3]"
+Explanation: The string representation of MyList should work like a regular list.
+
+Test case 4: Check append()
+Input: 
+    my_list = MyList([1, 2, 3])
+    my_list.append(4)
+    str(my_list)
+Expected Output: "[1, 2, 3, 4]"
+Actual Output: "[1, 2, 3, 4]"
+Explanation: The append() method should add an element to the list.
+
+Test case 5: Check print_sorted() with sorted append
+Input: 
+    my_list = MyList([1, 2, 3])
+    my_list.append(4)
+    my_list.print_sorted()
+Expected Output: [1, 2, 3, 4]
+Actual Output: [1, 2, 3, 4]
+Explanation: The list is printed in sorted order after appending 4.
+
+Test case 6: Check print_sorted() with not sorted append
+Input: 
+    my_list = MyList([3, 1, 2])
+    my_list.append(4)
+    my_list.print_sorted()
+Expected Output: [1, 2, 3, 4]
+Actual Output: [1, 2, 3, 4]
+Explanation: The list is printed in sorted order after appending 4.
+
+Test case 7: Check print_sorted() with no sorted append with negative number
+Input: 
+    my_list = MyList([1, 2, 3])
+    my_list.append(-1)
+    my_list.print_sorted()
+Expected Output: [-1, 1, 2, 3]
+Actual Output: [-1, 1, 2, 3]
+Explanation: The list is printed in sorted order after appending a negative number.
+
+Test case 8: Check print_sorted() with empty list
+Input: 
+    my_list = MyList([])
+    my_list.print_sorted()
 Expected Output: []
 Actual Output: []
-Explanation: An empty list should simply print as an empty list.
+Explanation: An empty list should print an empty list.
+
+Test case 9: Check print_sorted() returns a new list
+Input: 
+    my_list = MyList([3, 2, 1])
+    sorted_list = my_list.print_sorted()
+Expected Output: [1, 2, 3]
+Actual Output: [1, 2, 3]
+Explanation: print_sorted() should return a new sorted list, not modify the original.
+
+Test case 10: Class creation, regular print
+Input: 
+    my_list = MyList([5, 3, 1])
+    str(my_list)
+Expected Output: "[5, 3, 1]"
+Actual Output: "[5, 3, 1]"
+Explanation: Regular list functionality with MyList.
+
+Test case 11: Class creation, append and regular print
+Input: 
+    my_list = MyList([1, 2])
+    my_list.append(3)
+    str(my_list)
+Expected Output: "[1, 2, 3]"
+Actual Output: "[1, 2, 3]"
+Explanation: Append new element and print the updated list.
+
+Test case 12: Class creation, append, regular print, and sorted print
+Input: 
+    my_list = MyList([3, 1])
+    my_list.append(2)
+    str(my_list)
+    my_list.print_sorted()
+Expected Output: "[3, 1, 2]" and [1, 2, 3]
+Actual Output: "[3, 1, 2]" and [1, 2, 3]
+Explanation: Append new element, print the regular list, and then print the sorted list.
+
+Test case 13: Class creation, multiple appends, regular print and sorted print
+Input: 
+    my_list = MyList([5, 3])
+    my_list.append(4)
+    my_list.append(2)
+    str(my_list)
+    my_list.print_sorted()
+Expected Output: "[5, 3, 4, 2]" and [2, 3, 4, 5]
+Actual Output: "[5, 3, 4, 2]" and [2, 3, 4, 5]
+Explanation: Multiple appends followed by a regular print and sorted print.
 
