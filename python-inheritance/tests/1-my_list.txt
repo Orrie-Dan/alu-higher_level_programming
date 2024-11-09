@@ -1,0 +1,36 @@
+Test case 1:
+Input: MyList([3, 1, 2, 4])
+Expected Output: [1, 2, 3, 4]
+Actual Output: [1, 2, 3, 4]
+Explanation: The list is printed in ascending order without modifying the original list.
+
+Test case 2:
+Input: MyList([10, 5, 8])
+Expected Output: [5, 8, 10]
+Actual Output: [5, 8, 10]
+Explanation: The list is printed in ascending order without modifying the original list.
+
+Test case 3:
+Input: MyList([0, -1, 100])
+Expected Output: [-1, 0, 100]
+Actual Output: [-1, 0, 100]
+Explanation: The list is printed in ascending order without modifying the original list.
+
+Test case 4:
+Input: MyList([1])
+Expected Output: [1]
+Actual Output: [1]
+Explanation: A single-element list should remain the same when sorted.
+
+Test case 5:
+Input: MyList([1, 2, 3])
+Expected Output: [1, 2, 3]
+Actual Output: [1, 2, 3]
+Explanation: An already sorted list should remain the same when printed.
+
+Test case 6:
+Input: MyList([])
+Expected Output: []
+Actual Output: []
+Explanation: An empty list should simply print as an empty list.
+
