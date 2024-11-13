@@ -1,98 +1,67 @@
 #!/usr/bin/python3
 
 """
-This module provides functionality to:
-1. Collect command-line arguments passed to the script.
-2. Load a list from a JSON-like file ('add_item.json') if it exists.
-3. Append the new arguments to the existing list.
-4. Save the updated list back to the JSON-like file.
-
-The script assumes that the file may or may not exist and will create the file if necessary.
+This module allows you to add command-line arguments to a list and save them to a file.
+If the file doesn't exist, it is created, and if it exists, the arguments are appended.
 """
 
 def save_to_json_file(my_obj, filename):
     """
-    Saves a Python object (in this case, a list) to a file in a simple JSON-like format.
-
-    This function converts the list to a string, replacing single quotes with double quotes
-    to mimic a JSON format, and writes it to a file. If the file exists, it will be overwritten.
+    Saves a Python object (a list) to a file in a JSON-like format.
     
     Args:
         my_obj (list): The Python list to save to the file.
-        filename (str): The name of the file to write the list to.
-        
-    Example:
-        save_to_json_file([1, 2, 3], "add_item.json")
-        # This will save the list [1, 2, 3] to the file 'add_item.json' in JSON-like format.
+        filename (str): The file to save the list to.
     """
     with open(filename, 'w') as f:
-        # Convert the list to a string and replace single quotes with double quotes
-        f.write(str(my_obj).replace("'", '"'))  # Mimics JSON formatting
+        # Write the list to the file, using double quotes for JSON-like formatting
+        f.write(str(my_obj).replace("'", '"'))  # Mimicking JSON format
 
 
 def load_from_json_file(filename):
     """
-    Loads a Python object (list) from a JSON-like file.
-
-    This function reads a file and converts the string representation of a list back to a
-    Python list using `eval()`. If the file does not exist, an empty list is returned.
+    Loads a Python object (a list) from a file in a JSON-like format.
     
     Args:
-        filename (str): The name of the file to load the list from.
-        
+        filename (str): The file to load the list from.
+    
     Returns:
         list: The list from the file, or an empty list if the file doesn't exist.
-        
-    Example:
-        load_from_json_file("add_item.json")
-        # If the file contains '["apple", "banana"]', it will return the list ['apple', 'banana'].
     """
     try:
         with open(filename, 'r') as f:
-            # Read the content and convert it back to a list using eval
-            return eval(f.read())  # Using eval to convert the string back into a Python list
+            # Read the content of the file and convert it back to a list using eval()
+            return eval(f.read())  # Convert string back to a list (JSON-like)
     except FileNotFoundError:
-        return []  # Return an empty list if the file doesn't exist
+        return []  # If the file doesn't exist, return an empty list
 
 
 def add_arguments_to_json():
     """
-    Adds command-line arguments to a list and saves them to a JSON-like file.
-
-    This function does the following:
-    1. Retrieves command-line arguments passed to the script.
-    2. Loads the existing data from 'add_item.json', if it exists, or initializes an empty list.
-    3. Appends the new arguments to the list.
-    4. Saves the updated list back to 'add_item.json'.
-
-    The function does not handle exceptions related to invalid arguments and assumes that
-    the input is valid.
+    Adds command-line arguments to a list and saves them to a file.
     
-    Example:
-        If the script is called as `python3 script.py apple banana`,
-        it will add 'apple' and 'banana' to the list in 'add_item.json'.
+    The arguments passed to the script are loaded into a list, and the list is saved to
+    the 'add_item.json' file. If the file does not exist, it is created.
     """
-    import sys  # Importing sys to retrieve command-line arguments
+    import sys  # Import sys to retrieve the command-line arguments
     
-    # Get all arguments passed to the script, excluding the script name itself
+    # Retrieve the arguments passed to the script, excluding the script name
     arguments = sys.argv[1:]
 
-    # Load existing data from the file or initialize an empty list if the file doesn't exist
+    # Load the existing data from 'add_item.json' (or initialize an empty list if it doesn't exist)
     existing_data = load_from_json_file('add_item.json')
 
     # Append the new arguments to the existing data
     existing_data.extend(arguments)
 
-    # Save the updated list back to the file
+    # Save the updated list back to 'add_item.json'
     save_to_json_file(existing_data, 'add_item.json')
 
 
 if __name__ == "__main__":
     """
-    Main entry point of the script.
-    
-    Calls the `add_arguments_to_json` function to add command-line arguments to the
-    list stored in 'add_item.json'. This function handles reading and writing the file.
+    Main entry point for the script.
+    It will call `add_arguments_to_json()` to load and append arguments to the file.
     """
     add_arguments_to_json()
 
