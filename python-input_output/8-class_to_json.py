@@ -1,44 +1,49 @@
 #!/usr/bin/python3
 
 """
-This function takes an instance of a class and returns a dictionary representation
-of the object, making all attributes serializable for JSON serialization.
+This module defines a function that returns the dictionary description of an object
+for JSON serialization. The object is assumed to be an instance of a class, and
+all attributes of the class that are serializable (list, dictionary, string, integer,
+and boolean) are included in the resulting dictionary.
+
+The function can be used to prepare an object for serialization into formats like
+JSON, which requires the object to be represented as a dictionary with serializable values.
 """
 
 def class_to_json(obj):
     """
-    Convert the instance of a class to a dictionary representation for JSON serialization.
-    
+    Returns the dictionary description of an object for JSON serialization.
+
+    The function inspects the attributes of the object (an instance of a class) 
+    and creates a dictionary that includes only the attributes that are serializable. 
+    The serializable types are: list, dictionary, string, integer, and boolean.
+
     Args:
-        obj: An instance of a class.
-        
+        obj (object): The object instance whose attributes will be serialized.
+
     Returns:
-        A dictionary representation of the object, where all attributes are serializable.
+        dict: A dictionary representation of the object's serializable attributes.
+
+    This function excludes any attributes that are not of a serializable type (i.e., 
+    other than list, dict, str, int, or bool).
+
+    Example:
+        If the object has attributes like `first_name`, `last_name`, `age`, and `courses`,
+        and `courses` is a list, the dictionary will include only serializable attributes.
+        
+        Example:
+        >>> student = Student("John", "Doe", 25, ["Math", "Science"])
+        >>> class_to_json(student)
+        {'first_name': 'John', 'last_name': 'Doe', 'age': 25, 'courses': ['Math', 'Science']}
     """
-    # Create an empty dictionary to store the attributes of the object
-    result = {}
+    # Initialize an empty dictionary to hold the serializable attributes
+    serializable_dict = {}
 
-    # Iterate over the attributes of the object (using the __dict__ of the object)
-    for attr, value in obj.__dict__.items():
-        # Only add attributes that are of simple, JSON-serializable types
-        if isinstance(value, (str, int, float, bool, list, dict)):
-            result[attr] = value
+    # Iterate over the attributes of the object using its __dict__
+    for key, value in vars(obj).items():
+        # Check if the value is serializable (i.e., list, dict, str, int, or bool)
+        if isinstance(value, (list, dict, str, int, bool)):
+            serializable_dict[key] = value
     
-    # Return the dictionary representation
-    return result
-
-# Example class to demonstrate functionality
-class MyClass:
-    def __init__(self, name, age, is_active, tags):
-        self.name = name       # string
-        self.age = age         # integer
-        self.is_active = is_active # boolean
-        self.tags = tags       # list
-
-# Create an instance of MyClass
-obj = MyClass("John", 30, True, ["developer", "python"])
-
-# Convert the object to a dictionary using class_to_json function
-json_compatible = class_to_json(obj)
-print(json_compatible)
+    return serializable_dict
 
