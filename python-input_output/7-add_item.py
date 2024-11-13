@@ -1,137 +1,98 @@
 #!/usr/bin/python3
 
 """
-This script adds all arguments passed from the command line to a Python list
-and saves the updated list to a JSON file named 'add_item.json'. If the file 
-doesn't exist, it is created. If the file already exists, the new arguments 
-are appended to the existing list.
+This module provides functionality to:
+1. Collect command-line arguments passed to the script.
+2. Load a list from a JSON-like file ('add_item.json') if it exists.
+3. Append the new arguments to the existing list.
+4. Save the updated list back to the JSON-like file.
 
-The script doesn't use any external modules; everything is done manually.
+The script assumes that the file may or may not exist and will create the file if necessary.
 """
-
-def to_json_string(my_obj):
-    """
-    Converts a Python object (list, dictionary, etc.) to a JSON-formatted string.
-    
-    Args:
-        my_obj: The Python object to be converted into a JSON string.
-
-    Returns:
-        A JSON string representing the Python object.
-    """
-    if isinstance(my_obj, str):
-        return '"' + my_obj + '"'
-    elif isinstance(my_obj, bool):
-        return "true" if my_obj else "false"
-    elif my_obj is None:
-        return "null"
-    elif isinstance(my_obj, (int, float)):
-        return str(my_obj)
-    elif isinstance(my_obj, list):
-        return "[" + ", ".join(to_json_string(item) for item in my_obj) + "]"
-    elif isinstance(my_obj, dict):
-        items = [f'"{key}": {to_json_string(value)}' for key, value in my_obj.items()]
-        return "{" + ", ".join(items) + "}"
-    else:
-        raise TypeError(f"Object of type '{type(my_obj).__name__}' is not serializable")
-
-def from_json_string(my_str):
-    """
-    Converts a JSON-formatted string to a Python object (list, dictionary, etc.).
-
-    Args:
-        my_str: The JSON string to be converted into a Python object.
-
-    Returns:
-        The corresponding Python object (list, dictionary, etc.).
-    """
-    my_str = my_str.strip()  # Strip leading/trailing spaces
-
-    if my_str == "null":
-        return None
-    elif my_str == "true":
-        return True
-    elif my_str == "false":
-        return False
-    elif my_str.isdigit() or (my_str[0] == '-' and my_str[1:].isdigit()):
-        return int(my_str)
-    elif my_str.replace('.', '', 1).isdigit() and my_str.count('.') == 1:
-        return float(my_str)
-    elif my_str.startswith('"') and my_str.endswith('"'):
-        return my_str[1:-1]  # Strip quotes for string
-    elif my_str.startswith('[') and my_str.endswith(']'):
-        items = my_str[1:-1].strip()
-        if not items:
-            return []
-        return [from_json_string(item.strip()) for item in items.split(',')]
-    elif my_str.startswith('{') and my_str.endswith('}'):
-        items = my_str[1:-1].strip()
-        if not items:
-            return {}
-        result = {}
-        for item in items.split(','):
-            key_value = item.split(':', 1)
-            if len(key_value) == 2:
-                key = from_json_string(key_value[0].strip())
-                value = from_json_string(key_value[1].strip())
-                result[key] = value
-        return result
-    else:
-        raise TypeError("Invalid JSON string")
 
 def save_to_json_file(my_obj, filename):
     """
-    Writes a Python object to a JSON file.
+    Saves a Python object (in this case, a list) to a file in a simple JSON-like format.
 
-    Args:
-        my_obj: The Python object to be written to the file.
-        filename: The name of the file to which the JSON string will be saved.
-    """
-    json_string = to_json_string(my_obj)
+    This function converts the list to a string, replacing single quotes with double quotes
+    to mimic a JSON format, and writes it to a file. If the file exists, it will be overwritten.
     
-    with open(filename, 'w', encoding='utf-8') as file:
-        file.write(json_string)
+    Args:
+        my_obj (list): The Python list to save to the file.
+        filename (str): The name of the file to write the list to.
+        
+    Example:
+        save_to_json_file([1, 2, 3], "add_item.json")
+        # This will save the list [1, 2, 3] to the file 'add_item.json' in JSON-like format.
+    """
+    with open(filename, 'w') as f:
+        # Convert the list to a string and replace single quotes with double quotes
+        f.write(str(my_obj).replace("'", '"'))  # Mimics JSON formatting
+
 
 def load_from_json_file(filename):
     """
-    Loads a Python object from a JSON file.
+    Loads a Python object (list) from a JSON-like file.
 
+    This function reads a file and converts the string representation of a list back to a
+    Python list using `eval()`. If the file does not exist, an empty list is returned.
+    
     Args:
-        filename: The name of the file from which the JSON data will be loaded.
-
+        filename (str): The name of the file to load the list from.
+        
     Returns:
-        A Python object (list, dictionary, etc.) corresponding to the data in the file.
+        list: The list from the file, or an empty list if the file doesn't exist.
+        
+    Example:
+        load_from_json_file("add_item.json")
+        # If the file contains '["apple", "banana"]', it will return the list ['apple', 'banana'].
     """
-    with open(filename, 'r', encoding='utf-8') as file:
-        json_string = file.read()
-    return from_json_string(json_string)
+    try:
+        with open(filename, 'r') as f:
+            # Read the content and convert it back to a list using eval
+            return eval(f.read())  # Using eval to convert the string back into a Python list
+    except FileNotFoundError:
+        return []  # Return an empty list if the file doesn't exist
 
-def main():
+
+def add_arguments_to_json():
     """
-    Main function that handles command-line arguments, loads the existing 
-    list from 'add_item.json', appends the new arguments, and saves the updated 
-    list back to the file.
+    Adds command-line arguments to a list and saves them to a JSON-like file.
+
+    This function does the following:
+    1. Retrieves command-line arguments passed to the script.
+    2. Loads the existing data from 'add_item.json', if it exists, or initializes an empty list.
+    3. Appends the new arguments to the list.
+    4. Saves the updated list back to 'add_item.json'.
+
+    The function does not handle exceptions related to invalid arguments and assumes that
+    the input is valid.
+    
+    Example:
+        If the script is called as `python3 script.py apple banana`,
+        it will add 'apple' and 'banana' to the list in 'add_item.json'.
     """
-    # Get the arguments from command line, excluding the script name
+    import sys  # Importing sys to retrieve command-line arguments
+    
+    # Get all arguments passed to the script, excluding the script name itself
     arguments = sys.argv[1:]
 
-    # Try to load the existing list from the file
-    try:
-        current_list = load_from_json_file("add_item.json")
-    except FileNotFoundError:
-        # If the file doesn't exist, initialize an empty list
-        current_list = []
+    # Load existing data from the file or initialize an empty list if the file doesn't exist
+    existing_data = load_from_json_file('add_item.json')
 
-    # Add the new arguments to the list
-    current_list.extend(arguments)
+    # Append the new arguments to the existing data
+    existing_data.extend(arguments)
 
     # Save the updated list back to the file
-    save_to_json_file(current_list, "add_item.json")
+    save_to_json_file(existing_data, 'add_item.json')
+
 
 if __name__ == "__main__":
     """
-    Entry point of the script. When the script is executed, it calls the main 
-    function to process the command-line arguments and update the JSON file.
+    Main entry point of the script.
+    
+    Calls the `add_arguments_to_json` function to add command-line arguments to the
+    list stored in 'add_item.json'. This function handles reading and writing the file.
     """
-    main()
+    add_arguments_to_json()
 
