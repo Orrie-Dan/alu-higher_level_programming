@@ -1,27 +1,9 @@
--- Check if user user_0d_1 exists
-SELECT EXISTS(SELECT 1 FROM mysql.user WHERE user = 'user_0d_1' AND host = 'localhost') INTO @user_exists;
+-- Check if user user_0d_1 exists, and create the user if it does not exist
+CREATE USER IF NOT EXISTS 'user_0d_1'@'localhost' IDENTIFIED BY 'user_0d_1_pwd';
 
--- If the user does not exist, create the user
-IF @user_exists = 0 THEN
-    -- Output that user doesn't exist
-    SELECT 'user_0d_1 doesn''t exist';
+-- Grant all privileges to user_0d_1 on all databases
+GRANT ALL PRIVILEGES ON *.* TO 'user_0d_1'@'localhost' WITH GRANT OPTION;
 
-    -- Create the user
-    CREATE USER 'user_0d_1'@'localhost' IDENTIFIED BY 'user_0d_1_pwd';
-    
-    -- Grant all privileges to user_0d_1 on all databases
-    GRANT ALL PRIVILEGES ON *.* TO 'user_0d_1'@'localhost' WITH GRANT OPTION;
-    
-    -- Apply the changes
-    FLUSH PRIVILEGES;
-ELSE
-    -- Output that user exists
-    SELECT 'user_0d_1 exists';
-    
-    -- Grant all privileges to the existing user
-    GRANT ALL PRIVILEGES ON *.* TO 'user_0d_1'@'localhost' WITH GRANT OPTION;
-    
-    -- Apply the changes
-    FLUSH PRIVILEGES;
-END IF;
+-- Apply the changes
+FLUSH PRIVILEGES;
 
