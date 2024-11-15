@@ -1,8 +1,6 @@
--- List specific privileges for user_0d_1 on user_2_db
-SHOW GRANTS FOR 'user_0d_1'@'localhost' 
-  LIKE '%user_1_db%';
+-- Check if user_0d_1 exists and list grants
+SHOW GRANTS FOR 'user_0d_1'@'localhost';
 
--- List specific privileges for user_0d_2 on user_2_db
-SHOW GRANTS FOR 'user_0d_2'@'localhost' 
-  LIKE '%user_2_db%';
+-- Check if user_0d_2 exists and list grants
+SHOW GRANTS FOR 'user_0d_2'@'localhost';
 
