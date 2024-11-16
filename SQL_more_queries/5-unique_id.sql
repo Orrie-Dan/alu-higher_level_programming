@@ -8,3 +8,11 @@ CREATE TABLE IF NOT EXISTS unique_id (
     PRIMARY KEY (id)                   
 );
 
+-- Insert a new row into the 'unique_id' table 
+INSERT INTO unique_id (id, name) 
+VALUES (1, 'Sample Name');  
+
+-- Insert another row with different data 
+INSERT INTO unique_id (id, name) 
+VALUES (2, 'Another Name');  
+
