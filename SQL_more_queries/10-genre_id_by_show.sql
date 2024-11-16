@@ -1,7 +1,3 @@
--- script that lists all shows contained in hbtn_0d_tvshows
--- Use the provided database
-USE hbtn_0d_tvshows;
-
 -- List all shows that have at least one genre linked, sorted by title and genre_id
 SELECT tv_shows.title, tv_show_genres.genre_id
 FROM tv_shows
