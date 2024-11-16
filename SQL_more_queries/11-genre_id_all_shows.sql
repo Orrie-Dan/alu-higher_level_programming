@@ -1,6 +1,7 @@
--- List all shows and their genres (including NULL for shows with no genre)
-SELECT tv_shows.title, tv_show_genres.genre_id AS genre_id
+-- Script to list all shows and their genres
+-- Shows with no genre will show NULL for genre_id
+SELECT tv_shows.title, tv_show_genres.genre_id
 FROM tv_shows
-LEFT JOIN tv_show_genres AS g  ON tv_shows.id = g.show_id
-ORDER BY tv_shows.title , g.genre_id ;
+LEFT JOIN tv_show_genres ON tv_shows.id = tv_show_genres.show_id
+ORDER BY tv_shows.title ASC, tv_show_genres.genre_id ASC;
 
