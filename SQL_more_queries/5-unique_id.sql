@@ -1,5 +1,5 @@
 -- Use the provided database 
-USE hbtn_test_db_3;
+USE hbtn_test_db_5;
 
 -- Create the 'unique_id' table if it does not already exist
 CREATE TABLE IF NOT EXISTS unique_id (
