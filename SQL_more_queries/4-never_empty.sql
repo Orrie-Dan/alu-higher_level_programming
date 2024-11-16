@@ -1,4 +1,4 @@
--- Use the provided database (replace 'your_database_name' with the actual database)
+-- Use the provided database 
 USE hbtn_test_db_3;
 
 -- Create the table if it does not already exist
