@@ -1,4 +1,4 @@
--- Use the provided database
+-- Use the provided database f
 USE hbtn_0d_usa;
 
 -- Retrieve all cities in California, sorted by city id in ascending order
