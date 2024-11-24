@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-import urllib.request
 """
 This script fetches the content from a given URL using the urllib.request module.
 It reads the body of the response and displays it with a tabulation before the content.
@@ -11,6 +10,7 @@ Modules Used:
 
 The output is the body content of the response displayed with a tabulation as required.
 """
+import urllib.request
 # URL to fetch
 url = "https://alu-intranet.hbtn.io/status"
 
