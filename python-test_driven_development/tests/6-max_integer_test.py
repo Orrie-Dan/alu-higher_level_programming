@@ -1,4 +1,5 @@
 import unittest
+from max_in_list import max_in_list  # Import the function
 
 class TestMaxInList(unittest.TestCase):
     
@@ -18,7 +19,7 @@ class TestMaxInList(unittest.TestCase):
         self.assertEqual(result, 5)
     
     def test_one_negative_number(self):
-        """Test case where there is only one negative number in the list"""
+        """Test case where there is one negative number in the list"""
         result = max_in_list([1, -1, 2])
         self.assertEqual(result, 2)
     
@@ -46,7 +47,7 @@ class TestMaxInList(unittest.TestCase):
         """Test case where the list contains non-numeric elements"""
         with self.assertRaises(TypeError):
             max_in_list([1, 2, 'a', 4])
-        
+
 if __name__ == '__main__':
     unittest.main()
 
