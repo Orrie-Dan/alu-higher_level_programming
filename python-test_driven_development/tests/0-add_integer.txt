@@ -1,0 +1,96 @@
+Test Case 1:
+Input:
+    a = 1
+    b = 2
+Expected Output:
+    3
+
+Test Case 2:
+Input:
+    a = 1
+    b = -2
+Expected Output:
+    -1
+
+Test Case 3:
+Input:
+    a = 1.4
+    b = 2
+Expected Output:
+    3
+
+Test Case 4:
+Input:
+    a = 1
+    b = "2"
+Expected Output:
+    TypeError: b must be an integer
+
+Test Case 5:
+Input:
+    a = 1
+    b = (default 98)
+Expected Output:
+    99
+
+Test Case 6 (Missing one argument):
+Input:
+    a = 1
+Expected Output:
+    99 (since b defaults to 98)
+
+Test Case 7 (Missing two arguments):
+Input:
+    No arguments provided
+Expected Output:
+    TypeError: missing required argument 'a'
+
+Test Case 8 (Integer casting):
+Input:
+    a = 1.5
+    b = 2.7
+Expected Output:
+    3
+
+Test Case 9 (Invalid type - a is a list):
+Input:
+    a = [1]
+    b = 2
+Expected Output:
+    TypeError: a must be an integer
+
+Test Case 10 (Invalid type - b is a list):
+Input:
+    a = 1
+    b = [2]
+Expected Output:
+    TypeError: b must be an integer
+
+Test Case 11 (Float overflow):
+Input:
+    a = 1e100
+    b = 2e100
+Expected Output:
+    3e100
+
+Test Case 12 (NaN in float):
+Input:
+    a = float('nan')
+    b = 1
+Expected Output:
+    TypeError: cannot convert float NaN to integer
+
+Test Case 13 (Integer with float input):
+Input:
+    a = 1.999
+    b = 2
+Expected Output:
+    3
+
+Test Case 14 (Zero addition):
+Input:
+    a = 0
+    b = 0
+Expected Output:
+    0
+
