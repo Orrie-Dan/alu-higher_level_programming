@@ -1,37 +1,38 @@
 #!/usr/bin/python3
+import urllib.request
+
 """
 This script fetches the content from a given URL using the urllib.request module.
-It reads the body of the response and displays it with a tabulation before the content.
 
-The URL being accessed is: https://alu-intranet.hbtn.io/status
+The main function fetch_status(url) opens the specified URL and prints the body of the
+response with a tabulation before it.
 
-Modules Used:
-    - urllib.request: To open the URL and read the response.
-
-The output is the body content of the response displayed with a tabulation as required.
+The script can be run as a standalone program and will fetch content from the URL
+'https://intranet.hbtn.io/status' by default.
 """
-import urllib.request
-# URL to fetch
-url = "https://alu-intranet.hbtn.io/status"
 
 def fetch_status(url):
     """
-    Fetches the content from the provided URL and displays the body response.
-
-    This function uses urllib to open the provided URL, reads the body of the response,
-    and prints it with a tabulation prefix as specified.
-
-    Parameters:
-        url (str): The URL to fetch content from.
-
+    Fetches and prints the response body from the given URL.
+    
+    Args:
+        url (str): The URL to fetch the content from.
+        
     Returns:
         None
     """
-    with urllib.request.urlopen(url) as response:
-        body = response.read()  # Read the body of the response
-        print("Body response:")
-        print(f"\t- {body.decode('utf-8')}")  # Decode and print the body content
+    try:
+        with urllib.request.urlopen(url) as response:
+            body = response.read().decode('utf-8')
+            print(f"Body response:\n\t{body}")
+    except Exception as e:
+        print(f"Error fetching URL: {e}")
 
-# Calling the function to fetch and display the status page
-fetch_status(url)
+
+if __name__ == "__main__":
+    # URL for fetching status
+    url = "https://intranet.hbtn.io/status"
+    
+    # Fetch and display status for the given URL
+    fetch_status(url)
 
