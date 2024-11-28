@@ -1,0 +1,39 @@
+>>> text_indentation("Hello world. How are you? This is a test: of the function.")
+Hello world.
+
+How are you?
+
+This is a test:
+
+of the function.
+
+>>> text_indentation("What a great day. Let's enjoy it? Yes: we can!")
+What a great day.
+
+Let's enjoy it?
+
+Yes:
+
+we can!
+
+>>> text_indentation("No punctuation here")
+No punctuation here
+
+>>> text_indentation("One sentence. Another sentence? Third sentence: last one.")
+One sentence.
+
+Another sentence?
+
+Third sentence:
+
+last one.
+
+>>> text_indentation("Only punctuation. . . . . ? ? : : :")
+Only punctuation.
+
+. . . .
+
+? ?
+
+: : :
+
