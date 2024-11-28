@@ -1,125 +1,34 @@
-pytest
-Test Case 1:
-Input:
-    a = 1
-    b = 2
-Expected Output:
-    3
-Explanation:
-    Regular addition of two integers.
+import unittest
+from add_integer import add_integer
 
-Test Case 2:
-Input:
-    a = 1
-    b = -2
-Expected Output:
-    -1
-Explanation:
-    Addition of a positive integer and a negative integer.
+class TestAddInteger(unittest.TestCase):
+    
+    def test_add_integers(self):
+        self.assertEqual(add_integer(1, 2), 3)
+        self.assertEqual(add_integer(1, -2), -1)
+        self.assertEqual(add_integer(1.4, 2), 3)
+        self.assertEqual(add_integer(1, 1.5), 2)
+        self.assertEqual(add_integer(1, 98), 99)
+    
+    def test_type_error(self):
+        with self.assertRaises(TypeError):
+            add_integer(1, "2")
+        with self.assertRaises(TypeError):
+            add_integer([1], 2)
+        with self.assertRaises(TypeError):
+            add_integer(1, [2])
+    
+    def test_nan_error(self):
+        with self.assertRaises(TypeError):
+            add_integer(float('nan'), 1)
+    
+    def test_missing_argument(self):
+        self.assertEqual(add_integer(1), 99)
+    
+    def test_large_numbers(self):
+        self.assertEqual(add_integer(1e100, 2e100), 3e100)
+        self.assertEqual(add_integer(999999999999999999999, 1000000000000000000000), 1999999999999999999999)
 
-Test Case 3:
-Input:
-    a = 1.4
-    b = 2
-Expected Output:
-    3
-Explanation:
-    Addition of a float and an integer (casting the float to an integer).
-
-Test Case 4:
-Input:
-    a = 1
-    b = "2"
-Expected Output:
-    TypeError: b must be an integer
-Explanation:
-    The second argument is a string, which is invalid.
-
-Test Case 5 (Missing second argument, uses default for `b`):
-Input:
-    a = 1
-Expected Output:
-    99
-Explanation:
-    Missing second argument, so `b` defaults to 98. The result is `1 + 98 = 99`.
-
-Test Case 6 (Missing both arguments):
-Input:
-    No arguments provided
-Expected Output:
-    TypeError: missing required argument 'a'
-Explanation:
-    Both arguments are missing, which should raise a `TypeError`.
-
-Test Case 7:
-Input:
-    a = 1.5
-    b = 2.7
-Expected Output:
-    3
-Explanation:
-    Both arguments are floats. The function will cast them to integers before adding.
-
-Test Case 8 (Invalid type - `a` is a list):
-Input:
-    a = [1]
-    b = 2
-Expected Output:
-    TypeError: a must be an integer
-Explanation:
-    The first argument is a list, which is invalid.
-
-Test Case 9 (Invalid type - `b` is a list):
-Input:
-    a = 1
-    b = [2]
-Expected Output:
-    TypeError: b must be an integer
-Explanation:
-    The second argument is a list, which is invalid.
-
-Test Case 10 (Float overflow):
-Input:
-    a = 1e100
-    b = 2e100
-Expected Output:
-    3e100
-Explanation:
-    Very large float numbers should be handled by the function correctly.
-
-Test Case 11 (Cannot convert `NaN` to integer):
-Input:
-    a = float('nan')
-    b = 1
-Expected Output:
-    TypeError: cannot convert float NaN to integer
-Explanation:
-    `NaN` (Not a Number) cannot be converted to an integer and should raise a `TypeError`.
-
-Test Case 12 (Integer with float input):
-Input:
-    a = 1.999
-    b = 2
-Expected Output:
-    3
-Explanation:
-    The float `1.999` is cast to an integer before the addition.
-
-Test Case 13 (Zero addition):
-Input:
-    a = 0
-    b = 0
-Expected Output:
-    0
-Explanation:
-    Adding two zeros should return `0`.
-
-Test Case 14 (Edge case: extremely large integer addition):
-Input:
-    a = 999999999999999999999
-    b = 1000000000000000000000
-Expected Output:
-    1999999999999999999999
-Explanation:
-    The function should handle very large integers without error.
+if __name__ == '__main__':
+    unittest.main() 
 
