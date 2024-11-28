@@ -67,5 +67,7 @@ def matrix_divided(matrix, div):
         new_row = [round(element / div, 2) for element in row]
         new_matrix.append(new_row)
     
-    return new_matrix
-
+    return new_matrix 
+if __name__=="__main__":
+    import doctest
+    doctest.testfile("tests/0-add_integer.txt") 
