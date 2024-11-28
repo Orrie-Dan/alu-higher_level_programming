@@ -1,0 +1,15 @@
+# Valid Inputs
+say_my_name("John", "Doe")    # Expected Output: My name is John Doe
+say_my_name("Alice")          # Expected Output: My name is Alice 
+
+# Invalid Inputs
+try:
+    say_my_name("John", 123)  # Expected Output: TypeError: last_name must be a string
+except TypeError as e:
+    print(e)
+
+try:
+    say_my_name(123, "Doe")   # Expected Output: TypeError: first_name must be a string
+except TypeError as e:
+    print(e)
+
