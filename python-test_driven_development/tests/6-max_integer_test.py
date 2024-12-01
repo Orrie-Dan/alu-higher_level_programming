@@ -1,7 +1,14 @@
 # tests/6-max_integer_test.py
+# tests/6-max_integer_test.py
 
 import unittest
-from max_integer import max_integer  # Import the function to test
+import sys
+import os
+
+# Add the parent directory to the system path to allow import of max_integer.py
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from max_integer import max_integer  # Now this should work correctly
 
 class TestMaxInteger(unittest.TestCase):
     
