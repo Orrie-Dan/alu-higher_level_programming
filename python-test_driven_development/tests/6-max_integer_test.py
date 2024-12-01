@@ -1,54 +1,87 @@
-# 6-max_integer_1.py (test file)
-import unittest
-from max_in_list import max_in_list  # Import the function
+==================================
+The ``5-text_indentation`` module
+==================================
 
-class TestMaxInList(unittest.TestCase):
-    
-    def test_max_at_the_end(self):
-        """Test case where the maximum value is at the end of the list"""
-        result = max_in_list([1, 2, 3, 4, 5])
-        self.assertEqual(result, 5)
-    
-    def test_max_at_the_beginning(self):
-        """Test case where the maximum value is at the beginning of the list"""
-        result = max_in_list([5, 4, 3, 2, 1])
-        self.assertEqual(result, 5)
-    
-    def test_max_in_the_middle(self):
-        """Test case where the maximum value is in the middle of the list"""
-        result = max_in_list([1, 5, 3, 2, 4])
-        self.assertEqual(result, 5)
-    
-    def test_one_negative_number(self):
-        """Test case where there is one negative number in the list"""
-        result = max_in_list([1, -1, 2])
-        self.assertEqual(result, 2)
-    
-    def test_only_negative_numbers(self):
-        """Test case where the list contains only negative numbers"""
-        result = max_in_list([-1, -2, -3])
-        self.assertEqual(result, -1)
-    
-    def test_list_of_one_element(self):
-        """Test case where the list contains only one element"""
-        result = max_in_list([42])
-        self.assertEqual(result, 42)
-    
-    def test_empty_list(self):
-        """Test case where the list is empty"""
-        with self.assertRaises(ValueError):
-            max_in_list([])
+Using ``text-indentation``
+---------------------------
 
-    def test_invalid_input_type(self):
-        """Test case where input is not a list"""
-        with self.assertRaises(TypeError):
-            max_in_list("not a list")
-    
-    def test_non_numeric_elements(self):
-        """Test case where the list contains non-numeric elements"""
-        with self.assertRaises(TypeError):
-            max_in_list([1, 2, 'a', 4])
+Import the function:
 
-if __name__ == '__main__':
-    unittest.main()
+    >>> text_indentation = __import__('5-text_indentation').text_indentation
 
+Now test it:
+
+    >>> text_indentation("Hello.")
+    Hello.
+    <BLANKLINE>
+
+    >>> text_indentation("Hello. World: Here I am!")
+    Hello.
+    <BLANKLINE>
+    World:
+    <BLANKLINE>
+    Here I am!
+
+    >>> text_indentation("""Lorem ipsum dolor sit amet, consectetur adipiscing elit. \
+    ... Quonam modo? Utrum igitur tibi litteram videor an totas paginas commovere? \
+    ... Non autem hoc: igitur ne illud quidem. Fortasse id optimum, sed ubi illud: \
+    ... Plus semper voluptatis? Teneo, inquit, finem illi videri nihil dolere. \
+    ... Transfer idem ad modestiam vel temperantiam, quae est moderatio cupiditatum \
+    ... rationi oboediens. Si id dicis, vicimus. Inde sermone vario sex illa a Dipylo \
+    ... stadia confecimus. Sin aliud quid voles, postea. Quae animi affectio suum \
+    ... cuique tribuens atque hanc, quam dico. Utinam quidem dicerent alium alio \
+    ... beatiorem! Iam ruinas videres""")
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    <BLANKLINE>
+    Quonam modo?
+    <BLANKLINE>
+    Utrum igitur tibi litteram videor an totas paginas commovere?
+    <BLANKLINE>
+    Non autem hoc:
+    <BLANKLINE>
+    igitur ne illud quidem.
+    <BLANKLINE>
+    Fortasse id optimum, sed ubi illud:
+    <BLANKLINE>
+    Plus semper voluptatis?
+    <BLANKLINE>
+    Teneo, inquit, finem illi videri nihil dolere.
+    <BLANKLINE>
+    Transfer idem ad modestiam vel temperantiam, quae est moderatio cupiditatum rationi oboediens.
+    <BLANKLINE>
+    Si id dicis, vicimus.
+    <BLANKLINE>
+    Inde sermone vario sex illa a Dipylo stadia confecimus.
+    <BLANKLINE>
+    Sin aliud quid voles, postea.
+    <BLANKLINE>
+    Quae animi affectio suum cuique tribuens atque hanc, quam dico.
+    <BLANKLINE>
+    Utinam quidem dicerent alium alio beatiorem! Iam ruinas videres
+
+    >>> text_indentation(".    : ?")
+    .
+    <BLANKLINE>
+    :
+    <BLANKLINE>
+    ?
+    <BLANKLINE>
+
+    >>> text_indentation("Holberton")
+    Holberton
+
+    >>> text_indentation(9)
+    Traceback (most recent call last):
+    TypeError: text must be a string
+
+    >>> text_indentation("Hello\n\nThere.")
+    Hello
+    <BLANKLINE>
+    There.
+    <BLANKLINE>
+
+    >>> text_indentation("")
+
+    >>> text_indentation()
+    Traceback (most recent call last):
+    TypeError: text_indentation() missing 1 required positional argument: 'text'
