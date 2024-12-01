@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-"""Start link class to table in database 
-"""
+"""Script that takes in the name of a state as an argument and lists
+all cities of that state, using the database hbtn_0e_5_usa"""
 import sys
 from model_state import Base, State
 
